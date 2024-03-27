@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,7 +13,9 @@ namespace NewGame
     public partial class Form1 : Form
     {
         Player player;
-        Enemy enemy;
+        List<Enemy> enemy;
+        int NumEnemy;
+
 
         public Form1()
         {
@@ -22,14 +24,25 @@ namespace NewGame
             this.player = new Player(10, 10);
 
             // 位置と半径
-            this.enemy = new Enemy(10, 10, (float)-3.0, (float)-3.0, 10);
+            NumEnemy = 5;
+            var rand = new Random();
+            this.enemy = new List<Enemy>();
+            for(int i = 0; i < NumEnemy; ++i)
+            {
+                // this.enemy = new Enemy(10, 10, (float)-3.0, (float)-3.0, 10);
+                this.enemy.Add(new Enemy(rand.Next(minValue: 10, maxValue: this.Bounds.Width - 10), rand.Next(minValue: 10, maxValue: (this.Bounds.Height - 10) / 2), (float)-3.0, (float)-3.0, 10));
+            }
 
             Timer timer = new Timer();
             timer.Interval = 17; // 約60fps
-            timer.Tick += new EventHandler(Move1);
+            timer.Tick += new EventHandler(Update);
             timer.Start();
         }
 
+
+        // ============
+        // 自機の操作
+        // ============
         private void KeyDowned(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Right)
@@ -49,26 +62,29 @@ namespace NewGame
             }
         }
 
-        // =============
-        // 敵弾の挙動
-        // =============
-        private void Move1(object sender, EventArgs e)
+        
+        private void Update(object sender, EventArgs e)
         {
-            this.enemy.X += this.enemy.SpdX;
-            this.enemy.Y += this.enemy.SpdY;
-
-            // 左右でバウンド
-            if (this.enemy.X + 2 * this.enemy.R > this.Bounds.Width || this.enemy.X - this.enemy.R < 0)
+            // =============
+            // 敵弾の挙動
+            // =============
+            for (int i = 0; i < NumEnemy; ++i)
             {
-                this.enemy.SpdX = Math.Min((float)-1.01 * this.enemy.SpdX, (float)10.0);
-            }
+                this.enemy[i].X += this.enemy[i].SpdX;
+                this.enemy[i].Y += this.enemy[i].SpdY;
 
-            // 上下でバウンド
-            if (this.enemy.Y + 4 * this.enemy.R > this.Bounds.Height || this.enemy.Y - this.enemy.R < 0)
-            {
-                this.enemy.SpdY = Math.Min((float)-1.01 * this.enemy.SpdY, (float)10.0);
-            }
+                // 左右でバウンド
+                if (this.enemy[i].X + 2 * this.enemy[i].R > this.Bounds.Width || this.enemy[i].X - this.enemy[i].R < 0)
+                {
+                    this.enemy[i].SpdX = Math.Min((float)-1.01 * this.enemy[i].SpdX, (float)10.0);
+                }
 
+                // 上下でバウンド
+                if (this.enemy[i].Y + 4 * this.enemy[i].R > this.Bounds.Height || this.enemy[i].Y - this.enemy[i].R < 0)
+                {
+                    this.enemy[i].SpdY = Math.Min((float)-1.01 * this.enemy[i].SpdY, (float)10.0);
+                }
+            }
             // 再描画
             Invalidate();
         }
@@ -78,7 +94,8 @@ namespace NewGame
             SolidBrush brush = new SolidBrush(Color.HotPink);
             SolidBrush grayBrush = new SolidBrush(Color.DimGray);
 
-            e.Graphics.FillEllipse(brush, this.enemy.X, this.enemy.Y, this.enemy.R, this.enemy.R);
+            for (int i = 0; i < NumEnemy; ++i)
+                e.Graphics.FillEllipse(brush, this.enemy[i].X, this.enemy[i].Y, this.enemy[i].R * 2, this.enemy[i].R * 2);
             e.Graphics.FillEllipse(grayBrush, this.player.X, this.player.Y, 10, 10);
         }
 
