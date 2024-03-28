@@ -27,14 +27,8 @@ namespace NewGame
                 MainGameForm.play1.Visible = true;
                 MainGameForm.opening.Visible = false;
                 MainGameForm.stage.Visible = false;
+                MainGameForm.result.Visible = false;
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            MainGameForm.play1.Visible = true;
-            MainGameForm.opening.Visible = false;
-            MainGameForm.stage.Visible = false;
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -42,6 +36,12 @@ namespace NewGame
             MainGameForm.play1.Visible = true;
             MainGameForm.opening.Visible = false;
             MainGameForm.stage.Visible = false;
+            MainGameForm.result.Visible = false;
+        }
+
+        private void StagePrintScreenCtr_KeyDown(object sender, KeyEventArgs e)
+        {
+
         }
     }
 }

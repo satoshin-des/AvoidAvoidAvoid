@@ -22,6 +22,7 @@ namespace NewGame
             MainGameForm.play1.Visible = true;
             MainGameForm.opening.Visible = false;
             MainGameForm.stage.Visible = false;
+            MainGameForm.result.Visible = false;
         }
 
         private void button2_Click(object sender, EventArgs e)

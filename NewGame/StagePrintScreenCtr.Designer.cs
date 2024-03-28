@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.StartButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -42,26 +42,26 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Stage";
             // 
-            // button1
+            // StartButton
             // 
-            this.button1.Font = new System.Drawing.Font("MV Boli", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(310, 356);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(241, 84);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Start";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.StartButton.Font = new System.Drawing.Font("MV Boli", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StartButton.Location = new System.Drawing.Point(310, 356);
+            this.StartButton.Name = "StartButton";
+            this.StartButton.Size = new System.Drawing.Size(241, 84);
+            this.StartButton.TabIndex = 2;
+            this.StartButton.Text = "Start";
+            this.StartButton.UseVisualStyleBackColor = true;
+            this.StartButton.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // StagePrintScreenCtr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.StartButton);
             this.Controls.Add(this.label1);
             this.Name = "StagePrintScreenCtr";
             this.Size = new System.Drawing.Size(921, 521);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EnterKeyDown);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.StagePrintScreenCtr_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -70,6 +70,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button StartButton;
     }
 }

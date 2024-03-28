@@ -26,8 +26,8 @@ namespace NewGame
 
         Player player;
         List<Enemy> enemy;
-        int NumEnemy, S = 0;
-        Timer timer = new Timer();
+        int NumEnemy, S = 0, t = 0;
+        public static Timer timer = new Timer();
         static public Stopwatch PassedTime = new Stopwatch();
 
 
@@ -81,27 +81,39 @@ namespace NewGame
         private void Update(object sender, EventArgs e)
         {
             // ===========
-            // ステージ１
+            // クリア条件
             // ===========
-            if (S >= 60000 * MainGameForm.Stage)
+            if (t >= 360)
             {
+                t = 0;
+                this.player.X = this.Bounds.Width / 2;
+                this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
                 ++MainGameForm.Stage;
 
-                MainGameForm.play1.Visible = false;
                 MainGameForm.stage.Visible = true;
+                MainGameForm.result.Visible = false;
+                MainGameForm.play1.Visible = false;
                 MainGameForm.opening.Visible = false;
             }
 
-            // 敵弾の挙動
+
+            // ===========
+            // ステージ１
+            // ===========
             if (MainGameForm.Stage == 1)
             {
                 for (int i = 0; i < NumEnemy; ++i)
                 {
                     if ((this.enemy[i].X - this.player.X) * (this.enemy[i].X - this.player.X) + (this.enemy[i].Y - this.player.Y) * (this.enemy[i].Y - this.player.Y) < (this.enemy[i].R + 5) * (this.enemy[i].R + 5))
                     {
+                        this.player.X = this.Bounds.Width / 2;
+                        this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
+                        S = 0;
+
                         MainGameForm.play1.Visible = false;
                         MainGameForm.stage.Visible = false;
-                        MainGameForm.opening.Visible = true;
+                        MainGameForm.opening.Visible = false;
+                        MainGameForm.result.Visible = true;
                     }
 
                     this.enemy[i].X += this.enemy[i].SpdX;
@@ -125,7 +137,13 @@ namespace NewGame
                             this.enemy[i].SpdY = Math.Min((float)-1.01 * this.enemy[i].SpdY, (float)20.0);
                     }
                 }
-            }else if(MainGameForm.Stage == 2)
+            
+                
+            // ===========
+            // ステージ２
+            // ===========
+            }
+            else if(MainGameForm.Stage == 2)
             {
                 for (int i = 0; i < NumEnemy; ++i)
                 {
@@ -134,15 +152,25 @@ namespace NewGame
                     {
                         if (this.enemy[i].R < 30 && (this.enemy[i].X - this.player.X) * (this.enemy[i].X - this.player.X) + (this.enemy[i].Y - this.player.Y) * (this.enemy[i].Y - this.player.Y) < (this.enemy[i].R + 5) * (this.enemy[i].R + 5))
                         {
+                            this.player.X = this.Bounds.Width / 2;
+                            this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
+                            S = 0;
+
                             MainGameForm.play1.Visible = false;
                             MainGameForm.stage.Visible = false;
-                            MainGameForm.opening.Visible = true;
+                            MainGameForm.opening.Visible = false;
+                            MainGameForm.result.Visible = true;
                         }
                         if (this.enemy[i + NumEnemy].R < 30 && (this.enemy[i + NumEnemy].X - this.player.X) * (this.enemy[i + NumEnemy].X - this.player.X) + (this.enemy[i + NumEnemy].Y - this.player.Y) * (this.enemy[i + NumEnemy].Y - this.player.Y) < (this.enemy[i + NumEnemy].R + 5) * (this.enemy[i + NumEnemy].R + 5))
                         {
+                            this.player.X = this.Bounds.Width / 2;
+                            this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
+                            S = 0;
+
                             MainGameForm.play1.Visible = false;
                             MainGameForm.stage.Visible = false;
-                            MainGameForm.opening.Visible = true;
+                            MainGameForm.opening.Visible = false;
+                            MainGameForm.result.Visible = true;
                         }
                     }
 
@@ -172,15 +200,188 @@ namespace NewGame
                     // クルクル回る
                     this.enemy[i + NumEnemy].SpdX += (float)((i + 1.0) * 0.01);
                     this.enemy[i + NumEnemy].SpdY += (float)((i + 1.0) * 0.01);
-                    this.enemy[i + NumEnemy].X = (20 * i + 1) * (float)Math.Cos(this.enemy[i + NumEnemy].SpdX) + this.Bounds.Width / 2;
-                    this.enemy[i + NumEnemy].Y = (20 * i + 1) * (float)Math.Sin(this.enemy[i + NumEnemy].SpdY) + this.Bounds.Height / 2;
+                    this.enemy[i + NumEnemy].X = (20 * i + 20) * (float)Math.Cos(this.enemy[i + NumEnemy].SpdX) + (float)(this.Bounds.Width / 5.0) * i;
+                    this.enemy[i + NumEnemy].Y = (20 * i + 20) * (float)Math.Sin(this.enemy[i + NumEnemy].SpdY) + (float)(this.Bounds.Height / 2.0);
                 }
             }
 
 
+            // ===========
+            // ステージ３
+            // ===========
+            else if (MainGameForm.Stage == 3)
+            {
+                for (int i = 0; i < NumEnemy; ++i)
+                {
+                    // 当たり判定
+                    if (MainGameForm.Stage == 3)
+                    {
+                        if (this.enemy[i].R < 30 && (this.enemy[i].X - this.player.X) * (this.enemy[i].X - this.player.X) + (this.enemy[i].Y - this.player.Y) * (this.enemy[i].Y - this.player.Y) < (this.enemy[i].R + 5) * (this.enemy[i].R + 5))
+                        {
+                            this.player.X = this.Bounds.Width / 2;
+                            this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
+                            S = 0;
+
+                            MainGameForm.play1.Visible = false;
+                            MainGameForm.stage.Visible = false;
+                            MainGameForm.opening.Visible = false;
+                            MainGameForm.result.Visible = true;
+                        }
+                        if (this.enemy[i + NumEnemy].R < 30 && (this.enemy[i + NumEnemy].X - this.player.X) * (this.enemy[i + NumEnemy].X - this.player.X) + (this.enemy[i + NumEnemy].Y - this.player.Y) * (this.enemy[i + NumEnemy].Y - this.player.Y) < (this.enemy[i + NumEnemy].R + 5) * (this.enemy[i + NumEnemy].R + 5))
+                        {
+                            this.player.X = this.Bounds.Width / 2;
+                            this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
+                            S = 0;
+
+                            MainGameForm.play1.Visible = false;
+                            MainGameForm.stage.Visible = false;
+                            MainGameForm.opening.Visible = false;
+                            MainGameForm.result.Visible = true;
+                        }
+                        if (this.enemy[i + 2 * NumEnemy].R < 30 && (this.enemy[i + 2 * NumEnemy].X - this.player.X) * (this.enemy[i + 2 * NumEnemy].X - this.player.X) + (this.enemy[i + 2 * NumEnemy].Y - this.player.Y) * (this.enemy[i + 2 * NumEnemy].Y - this.player.Y) < (this.enemy[i + 2 * NumEnemy].R + 5) * (this.enemy[i + 2 * NumEnemy].R + 5))
+                        {
+                            this.player.X = this.Bounds.Width / 2;
+                            this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
+                            S = 0;
+
+                            MainGameForm.play1.Visible = false;
+                            MainGameForm.stage.Visible = false;
+                            MainGameForm.opening.Visible = false;
+                            MainGameForm.result.Visible = true;
+                        }
+                    }
+
+                    // 進める
+                    this.enemy[i].X += this.enemy[i].SpdX;
+                    this.enemy[i].Y += this.enemy[i].SpdY;
+
+                    // 左右でバウンド
+                    if (this.enemy[i].X + 2 * this.enemy[i].R > this.Bounds.Width || this.enemy[i].X - this.enemy[i].R < 0)
+                    {
+                        if (this.enemy[i].SpdX > 0)
+                            this.enemy[i].SpdX = Math.Max((float)-1.01 * this.enemy[i].SpdX, (float)-20.0);
+                        else
+                            this.enemy[i].SpdX = Math.Min((float)-1.01 * this.enemy[i].SpdX, (float)20.0);
+                    }
+
+                    // 上下でバウンド
+                    if (this.enemy[i].Y + 4 * this.enemy[i].R > this.Bounds.Height || this.enemy[i].Y - this.enemy[i].R < 0)
+                    {
+                        if (this.enemy[i].SpdY > 0)
+                            this.enemy[i].SpdY = Math.Max((float)-1.01 * this.enemy[i].SpdY, (float)-20.0);
+                        else
+                            this.enemy[i].SpdY = Math.Min((float)-1.01 * this.enemy[i].SpdY, (float)20.0);
+                    }
+
+
+                    // クルクル回る
+                    this.enemy[i + NumEnemy].SpdX += (float)((i + 1.0) * 0.01);
+                    this.enemy[i + NumEnemy].SpdY += (float)((i + 1.0) * 0.01);
+                    this.enemy[i + NumEnemy].X = (this.Bounds.Height / 2) * (float)Math.Cos(this.enemy[i + NumEnemy].SpdX) + (float)(this.Bounds.Width / 5.0) * i;
+                    this.enemy[i + NumEnemy].Y = (this.Bounds.Height / 2) * (float)Math.Sin(this.enemy[i + NumEnemy].SpdY) + (float)(this.Bounds.Height / 2.0);
+
+                    // リサジュー曲線
+                    this.enemy[i + 2 * NumEnemy].SpdX += (float)((i + 1.0) * 0.001);
+                    this.enemy[i + 2 * NumEnemy].SpdY += (float)((i + 1.0) * 0.001);
+                    this.enemy[i + 2 * NumEnemy].X = (this.Bounds.Height / 2 + 10 * i) * (float)Math.Sin((i + 1) * this.enemy[i + 2 * NumEnemy].SpdX) + (float)(this.Bounds.Width / 6.0) * i + 40;
+                    this.enemy[i + 2 * NumEnemy].Y = (this.Bounds.Height / 2 + 11 * i) * (float)Math.Cos((i + 1) * this.enemy[i + 2 * NumEnemy].SpdY) + this.Bounds.Height / 2;
+                }
+            }
+
+
+            // ===========
+            // ステージ４
+            // ===========
+            else if (MainGameForm.Stage == 4)
+            {
+                for (int i = 0; i < NumEnemy; ++i)
+                {
+                    // 当たり判定
+                    if (MainGameForm.Stage == 4)
+                    {
+                        if (this.enemy[i].R < 30 && (this.enemy[i].X - this.player.X) * (this.enemy[i].X - this.player.X) + (this.enemy[i].Y - this.player.Y) * (this.enemy[i].Y - this.player.Y) < (this.enemy[i].R + 5) * (this.enemy[i].R + 5))
+                        {
+                            this.player.X = this.Bounds.Width / 2;
+                            this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
+                            S = 0;
+
+                            MainGameForm.play1.Visible = false;
+                            MainGameForm.stage.Visible = false;
+                            MainGameForm.opening.Visible = false;
+                            MainGameForm.result.Visible = true;
+                        }
+                        if (this.enemy[i + NumEnemy].R < 30 && (this.enemy[i + NumEnemy].X - this.player.X) * (this.enemy[i + NumEnemy].X - this.player.X) + (this.enemy[i + NumEnemy].Y - this.player.Y) * (this.enemy[i + NumEnemy].Y - this.player.Y) < (this.enemy[i + NumEnemy].R + 5) * (this.enemy[i + NumEnemy].R + 5))
+                        {
+                            this.player.X = this.Bounds.Width / 2;
+                            this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
+                            S = 0;
+
+                            MainGameForm.play1.Visible = false;
+                            MainGameForm.stage.Visible = false;
+                            MainGameForm.opening.Visible = false;
+                            MainGameForm.result.Visible = true;
+                        }
+                        if (this.enemy[i + 2 * NumEnemy].R < 30 && (this.enemy[i + 2 * NumEnemy].X - this.player.X) * (this.enemy[i + 2 * NumEnemy].X - this.player.X) + (this.enemy[i + 2 * NumEnemy].Y - this.player.Y) * (this.enemy[i + 2 * NumEnemy].Y - this.player.Y) < (this.enemy[i + 2 * NumEnemy].R + 5) * (this.enemy[i + 2 * NumEnemy].R + 5))
+                        {
+                            this.player.X = this.Bounds.Width / 2;
+                            this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
+                            S = 0;
+
+                            MainGameForm.play1.Visible = false;
+                            MainGameForm.stage.Visible = false;
+                            MainGameForm.opening.Visible = false;
+                            MainGameForm.result.Visible = true;
+                        }
+                    }
+
+                    // 進める
+                    this.enemy[i].X += this.enemy[i].SpdX;
+                    this.enemy[i].Y += this.enemy[i].SpdY;
+
+                    // 左右でバウンド
+                    if (this.enemy[i].X + 2 * this.enemy[i].R > this.Bounds.Width || this.enemy[i].X - this.enemy[i].R < 0)
+                    {
+                        if (this.enemy[i].SpdX > 0)
+                            this.enemy[i].SpdX = Math.Max((float)-1.01 * this.enemy[i].SpdX, (float)-20.0);
+                        else
+                            this.enemy[i].SpdX = Math.Min((float)-1.01 * this.enemy[i].SpdX, (float)20.0);
+                    }
+
+                    // 上下でバウンド
+                    if (this.enemy[i].Y + 4 * this.enemy[i].R > this.Bounds.Height || this.enemy[i].Y - this.enemy[i].R < 0)
+                    {
+                        if (this.enemy[i].SpdY > 0)
+                            this.enemy[i].SpdY = Math.Max((float)-1.01 * this.enemy[i].SpdY, (float)-20.0);
+                        else
+                            this.enemy[i].SpdY = Math.Min((float)-1.01 * this.enemy[i].SpdY, (float)20.0);
+                    }
+
+
+                    // クルクル回る
+                    this.enemy[i + NumEnemy].SpdX += (float)((i + 1.0) * 0.01);
+                    this.enemy[i + NumEnemy].SpdY += (float)((i + 1.0) * 0.01);
+                    this.enemy[i + NumEnemy].X = (this.Bounds.Height / 2) * (float)Math.Cos(this.enemy[i + NumEnemy].SpdX) + (float)(this.Bounds.Width / 5.0) * i;
+                    this.enemy[i + NumEnemy].Y = (this.Bounds.Height / 2) * (float)Math.Sin(this.enemy[i + NumEnemy].SpdY) + (float)(this.Bounds.Height / 2.0);
+
+                    // リサジュー曲線
+                    this.enemy[i + 2 * NumEnemy].SpdX += (float)((i + 1.0) * 0.001);
+                    this.enemy[i + 2 * NumEnemy].SpdY += (float)((i + 1.0) * 0.001);
+                    this.enemy[i + 2 * NumEnemy].X = (this.Bounds.Height / 2 + 10 * i) * (float)Math.Sin((i + 1) * this.enemy[i + 2 * NumEnemy].SpdX) + (float)(this.Bounds.Width / 6.0) * i + 40;
+                    this.enemy[i + 2 * NumEnemy].Y = (this.Bounds.Height / 2 + 11 * i) * (float)Math.Cos((i + 1) * this.enemy[i + 2 * NumEnemy].SpdY) + this.Bounds.Height / 2;
+
+                    // 行ったり来たり
+                    this.enemy[i + 3 * NumEnemy].SpdX += (float)((i + 1.0) * 0.001);
+                    this.enemy[i + 3 * NumEnemy].SpdY += (float)((i + 1.0) * 0.001);
+                    this.enemy[i + 3 * NumEnemy].Y += (float)(this.Bounds.Height / 2.0) * (float)Math.Sin(this.enemy[i + 3 * NumEnemy].SpdY);
+                }
+            }
+
+
+            // =================
             // 得点の加算と表示
+            // =================
             PassedTime.Stop();
-            S += (int)PassedTime.Elapsed.TotalSeconds;
+            ++S; ++t;
             this.label1.Text = "Score: " + S + ", " + MainGameForm.Stage;
             PassedTime.Start();
 
@@ -201,6 +402,14 @@ namespace NewGame
                 for (int i = NumEnemy; i < 2 * NumEnemy; ++i)
                     e.Graphics.FillEllipse(brush, this.enemy[i].X, this.enemy[i].Y, this.enemy[i].R * 2, this.enemy[i].R * 2);
 
+            if (MainGameForm.Stage >= 3)
+                for (int i = 2 * NumEnemy; i < 3 * NumEnemy; ++i)
+                    e.Graphics.FillEllipse(brush, this.enemy[i].X, this.enemy[i].Y, this.enemy[i].R * 2, this.enemy[i].R * 2);
+
+            
+            if (MainGameForm.Stage >= 4)
+                for (int i = 3 * NumEnemy; i < 4 * NumEnemy; ++i)
+                    e.Graphics.FillRectangle(brush, new Rectangle((int)this.enemy[i].R, (int)this.enemy[i].R, (int)this.enemy[i].R + 10, (int)this.enemy[i].R + 100));
 
 
             e.Graphics.FillEllipse(grayBrush, this.player.X, this.player.Y, 10, 10);
