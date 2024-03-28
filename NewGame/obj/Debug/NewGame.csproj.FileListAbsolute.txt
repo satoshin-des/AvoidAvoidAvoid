@@ -12,3 +12,4 @@ C:\Users\trans\source\repos\NewGame\NewGame\obj\Debug\NewGame.OpeningScreenCtr.r
 C:\Users\trans\source\repos\NewGame\NewGame\obj\Debug\NewGame.StagePrintScreenCtr.resources
 C:\Users\trans\source\repos\NewGame\NewGame\obj\Debug\NewGame.ResultCtr.resources
 C:\Users\trans\source\repos\NewGame\NewGame\obj\Debug\NewGame.PlayScreenCtr.resources
+C:\Users\trans\source\repos\NewGame\NewGame\obj\Debug\NewGame.EndingScreenCtr.resources

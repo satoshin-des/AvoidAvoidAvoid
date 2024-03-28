@@ -28,6 +28,7 @@ namespace NewGame
                 MainGameForm.opening.Visible = false;
                 MainGameForm.stage.Visible = false;
                 MainGameForm.result.Visible = false;
+                MainGameForm.ending.Visible = false;
             }
         }
 
@@ -37,6 +38,7 @@ namespace NewGame
             MainGameForm.opening.Visible = false;
             MainGameForm.stage.Visible = false;
             MainGameForm.result.Visible = false;
+            MainGameForm.ending.Visible = false;
         }
 
         private void StagePrintScreenCtr_KeyDown(object sender, KeyEventArgs e)

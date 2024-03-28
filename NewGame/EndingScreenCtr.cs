@@ -10,25 +10,20 @@ using System.Windows.Forms;
 
 namespace NewGame
 {
-    public partial class ResultCtr : UserControl
+    public partial class EndingScreenCtr : UserControl
     {
-        public ResultCtr()
+        public EndingScreenCtr()
         {
             InitializeComponent();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MainGameForm.play1.Visible = true;
-            MainGameForm.opening.Visible = false;
+            MainGameForm.play1.Visible = false;
+            MainGameForm.opening.Visible = true;
             MainGameForm.stage.Visible = false;
             MainGameForm.result.Visible = false;
             MainGameForm.ending.Visible = false;
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
     }
 }

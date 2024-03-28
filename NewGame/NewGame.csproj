@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EndingScreenCtr.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EndingScreenCtr.Designer.cs">
+      <DependentUpon>EndingScreenCtr.cs</DependentUpon>
+    </Compile>
     <Compile Include="Enemy.cs" />
     <Compile Include="MainGameForm.cs">
       <SubType>Form</SubType>
@@ -80,6 +86,9 @@
     <Compile Include="StagePrintScreenCtr.Designer.cs">
       <DependentUpon>StagePrintScreenCtr.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="EndingScreenCtr.resx">
+      <DependentUpon>EndingScreenCtr.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainGameForm.resx">
       <DependentUpon>MainGameForm.cs</DependentUpon>
     </EmbeddedResource>
