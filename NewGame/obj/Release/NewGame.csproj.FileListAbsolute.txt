@@ -1,9 +1,7 @@
 C:\Users\trans\source\repos\NewGame\NewGame\bin\Release\NewGame.exe.config
 C:\Users\trans\source\repos\NewGame\NewGame\bin\Release\NewGame.exe
-C:\Users\trans\source\repos\NewGame\NewGame\bin\Release\NewGame.pdb
 C:\Users\trans\source\repos\NewGame\NewGame\obj\Release\NewGame.csproj.AssemblyReference.cache
 C:\Users\trans\source\repos\NewGame\NewGame\obj\Release\NewGame.EndingScreenCtr.resources
-C:\Users\trans\source\repos\NewGame\NewGame\obj\Release\NewGame.MainGameForm.resources
 C:\Users\trans\source\repos\NewGame\NewGame\obj\Release\NewGame.OpeningScreenCtr.resources
 C:\Users\trans\source\repos\NewGame\NewGame\obj\Release\NewGame.PlayScreenCtr.resources
 C:\Users\trans\source\repos\NewGame\NewGame\obj\Release\NewGame.Properties.Resources.resources
@@ -12,4 +10,4 @@ C:\Users\trans\source\repos\NewGame\NewGame\obj\Release\NewGame.StagePrintScreen
 C:\Users\trans\source\repos\NewGame\NewGame\obj\Release\NewGame.csproj.GenerateResource.cache
 C:\Users\trans\source\repos\NewGame\NewGame\obj\Release\NewGame.csproj.CoreCompileInputs.cache
 C:\Users\trans\source\repos\NewGame\NewGame\obj\Release\NewGame.exe
-C:\Users\trans\source\repos\NewGame\NewGame\obj\Release\NewGame.pdb
+C:\Users\trans\source\repos\NewGame\NewGame\obj\Release\NewGame.AvoidAvoidAvoid.resources

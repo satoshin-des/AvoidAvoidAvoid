@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace NewGame
 {
-    public partial class MainGameForm : Form
+    public partial class AvoidAvoidAvoid : Form
     {
 
         public static OpeningScreenCtr opening;
@@ -20,7 +20,7 @@ namespace NewGame
         public static EndingScreenCtr ending;
 
         public static int Stage = 1;
-        public MainGameForm()
+        public AvoidAvoidAvoid()
         {
             InitializeComponent();
 

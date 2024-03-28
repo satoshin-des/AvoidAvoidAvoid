@@ -19,9 +19,20 @@ namespace NewGame
 
         private void EasyStartBottun_Click(object sender, EventArgs e)
         {
-            MainGameForm.opening.Visible = false;
-            MainGameForm.play1.Visible = false;
-            MainGameForm.stage.Visible = true;
+            AvoidAvoidAvoid.opening.Visible = false;
+            AvoidAvoidAvoid.play1.Visible = false;
+            AvoidAvoidAvoid.stage.Visible = true;
+            AvoidAvoidAvoid.result.Visible = false;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

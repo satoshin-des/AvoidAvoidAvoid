@@ -17,7 +17,7 @@ namespace NewGame
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainGameForm());
+            Application.Run(new AvoidAvoidAvoid());
         }
     }
 }

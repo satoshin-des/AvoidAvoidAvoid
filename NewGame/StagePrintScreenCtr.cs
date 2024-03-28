@@ -24,21 +24,21 @@ namespace NewGame
         {
             if (e.KeyCode == Keys.Enter)
             {
-                MainGameForm.play1.Visible = true;
-                MainGameForm.opening.Visible = false;
-                MainGameForm.stage.Visible = false;
-                MainGameForm.result.Visible = false;
-                MainGameForm.ending.Visible = false;
+                AvoidAvoidAvoid.play1.Visible = true;
+                AvoidAvoidAvoid.opening.Visible = false;
+                AvoidAvoidAvoid.stage.Visible = false;
+                AvoidAvoidAvoid.result.Visible = false;
+                AvoidAvoidAvoid.ending.Visible = false;
             }
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            MainGameForm.play1.Visible = true;
-            MainGameForm.opening.Visible = false;
-            MainGameForm.stage.Visible = false;
-            MainGameForm.result.Visible = false;
-            MainGameForm.ending.Visible = false;
+            AvoidAvoidAvoid.play1.Visible = true;
+            AvoidAvoidAvoid.opening.Visible = false;
+            AvoidAvoidAvoid.stage.Visible = false;
+            AvoidAvoidAvoid.result.Visible = false;
+            AvoidAvoidAvoid.ending.Visible = false;
         }
 
         private void StagePrintScreenCtr_KeyDown(object sender, KeyEventArgs e)

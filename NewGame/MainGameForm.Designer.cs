@@ -1,6 +1,6 @@
 ﻿namespace NewGame
 {
-    partial class MainGameForm
+    partial class AvoidAvoidAvoid
     {
         /// <summary>
         /// Required designer variable.
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AvoidAvoidAvoid));
             this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
@@ -39,14 +40,15 @@
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // MainGameForm
+            // AvoidAvoidAvoid
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(923, 523);
             this.Controls.Add(this.panel1);
-            this.Name = "MainGameForm";
-            this.Text = "MainGameForm";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "AvoidAvoidAvoid";
+            this.Text = "AvoidAvoiAvoid";
             this.Load += new System.EventHandler(this.MainGameForm_Load);
             this.ResumeLayout(false);
 

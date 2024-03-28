@@ -49,14 +49,12 @@ namespace NewGame
                 // this.enemy = new Enemy(10, 10, (float)-3.0, (float)-3.0, 10);
                 this.enemy.Add(new Enemy(rand.Next(minValue: 10, maxValue: this.Bounds.Width - 10), rand.Next(minValue: 10, maxValue: (this.Bounds.Height - 10) / 2), (float)-3.0, (float)-3.0, 10));
             }
-            for (int i = 3 * NumEnemy; i < 4 * NumEnemy; ++i)
-            {
-                // this.enemy = new Enemy(10, 10, (float)-3.0, (float)-3.0, 10);
-                this.enemy.Add(new Enemy((float)((i - 3 * NumEnemy) * this.Bounds.Width / 5.0), 0, (float)-3.0, (float)-3.0, 10));
-            }
 
             for(int i = 0; i < NumDanmaku; ++i)
             {
+                this.danmaku.Add(new Enemy(this.Bounds.Width / (float)2.0, this.Bounds.Height * (float)1.0 / 6, (float)Math.Cos(i * Math.PI / 4.0 + i), (float)Math.Sin(i * Math.PI / 4.0 + i), 20));
+
+                /*
                 if(i % 8 == 0)
                     this.danmaku.Add(new Enemy(this.Bounds.Width / (float)2.0, this.Bounds.Height * (float)1.0 / 6, 1, 0, 20));
                 else if (i % 8 == 1)
@@ -73,6 +71,7 @@ namespace NewGame
                     this.danmaku.Add(new Enemy(this.Bounds.Width / (float)2.0, this.Bounds.Height * (float)1.0 / 6, 0, -1, 20));
                 else if (i % 8 == 7)
                     this.danmaku.Add(new Enemy(this.Bounds.Width / (float)2.0, this.Bounds.Height * (float)1.0 / 6, 1 / (float)Math.Sqrt(2), -1 / (float)Math.Sqrt(2), 20));
+                */
             }
 
             // Timer timer = new Timer();
@@ -116,34 +115,46 @@ namespace NewGame
                 t = 0;
                 this.player.X = this.Bounds.Width / 2;
                 this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
-                ++MainGameForm.Stage;
+                ++AvoidAvoidAvoid.Stage;
 
-                MainGameForm.stage.Visible = true;
-                MainGameForm.result.Visible = false;
-                MainGameForm.play1.Visible = false;
-                MainGameForm.opening.Visible = false;
-                MainGameForm.ending.Visible = false;
+                if (AvoidAvoidAvoid.Stage >= 5)
+                {
+                    AvoidAvoidAvoid.Stage = 1;
+                    AvoidAvoidAvoid.stage.Visible = false;
+                    AvoidAvoidAvoid.result.Visible = false;
+                    AvoidAvoidAvoid.play1.Visible = false;
+                    AvoidAvoidAvoid.opening.Visible = false;
+                    AvoidAvoidAvoid.ending.Visible = true;
+                }
+                else
+                {
+                    AvoidAvoidAvoid.stage.Visible = true;
+                    AvoidAvoidAvoid.result.Visible = false;
+                    AvoidAvoidAvoid.play1.Visible = false;
+                    AvoidAvoidAvoid.opening.Visible = false;
+                    AvoidAvoidAvoid.ending.Visible = false;
+                }
             }
 
 
             // ===========
             // ステージ１
             // ===========
-            if (MainGameForm.Stage == 1)
+            if (AvoidAvoidAvoid.play1.Visible && AvoidAvoidAvoid.Stage == 1)
             {
                 for (int i = 0; i < NumEnemy; ++i)
                 {
-                    if ((this.enemy[i].X - this.player.X) * (this.enemy[i].X - this.player.X) + (this.enemy[i].Y - this.player.Y) * (this.enemy[i].Y - this.player.Y) < (this.enemy[i].R + 5) * (this.enemy[i].R + 5))
+                    if (S > 100 && (this.enemy[i].X - this.player.X + this.enemy[i].R - 5) * (this.enemy[i].X - this.player.X + this.enemy[i].R - 5) + (this.enemy[i].Y - this.player.Y + this.enemy[i].R - 5) * (this.enemy[i].Y - this.player.Y + this.enemy[i].R - 5) < (this.enemy[i].R + 5) * (this.enemy[i].R + 5))
                     {
                         this.player.X = this.Bounds.Width / 2;
                         this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
                         S = 0;
 
-                        MainGameForm.play1.Visible = false;
-                        MainGameForm.stage.Visible = false;
-                        MainGameForm.opening.Visible = false;
-                        MainGameForm.result.Visible = true;
-                        MainGameForm.ending.Visible = false;
+                        AvoidAvoidAvoid.play1.Visible = false;
+                        AvoidAvoidAvoid.stage.Visible = false;
+                        AvoidAvoidAvoid.opening.Visible = false;
+                        AvoidAvoidAvoid.result.Visible = true;
+                        AvoidAvoidAvoid.ending.Visible = false;
                     }
 
                     this.enemy[i].X += this.enemy[i].SpdX;
@@ -173,37 +184,34 @@ namespace NewGame
             // ステージ２
             // ===========
             }
-            else if(MainGameForm.Stage == 2)
+            else if(AvoidAvoidAvoid.play1.Visible && AvoidAvoidAvoid.Stage == 2)
             {
                 for (int i = 0; i < NumEnemy; ++i)
                 {
                     // 当たり判定
-                    if (MainGameForm.Stage == 2)
+                    if (S > 100 && (this.enemy[i].X - this.player.X + this.enemy[i].R - 5) * (this.enemy[i].X - this.player.X + this.enemy[i].R - 5) + (this.enemy[i].Y - this.player.Y + this.enemy[i].R - 5) * (this.enemy[i].Y - this.player.Y + this.enemy[i].R - 5) < (this.enemy[i].R + 5) * (this.enemy[i].R + 5))
                     {
-                        if (this.enemy[i].R < 30 && (this.enemy[i].X - this.player.X) * (this.enemy[i].X - this.player.X) + (this.enemy[i].Y - this.player.Y) * (this.enemy[i].Y - this.player.Y) < (this.enemy[i].R + 5) * (this.enemy[i].R + 5))
-                        {
-                            this.player.X = this.Bounds.Width / 2;
-                            this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
-                            S = 0;
+                        this.player.X = this.Bounds.Width / 2;
+                        this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
+                        S = 0;
 
-                            MainGameForm.play1.Visible = false;
-                            MainGameForm.stage.Visible = false;
-                            MainGameForm.opening.Visible = false;
-                            MainGameForm.result.Visible = true;
-                            MainGameForm.ending.Visible = false;
-                        }
-                        if (this.enemy[i + NumEnemy].R < 30 && (this.enemy[i + NumEnemy].X - this.player.X) * (this.enemy[i + NumEnemy].X - this.player.X) + (this.enemy[i + NumEnemy].Y - this.player.Y) * (this.enemy[i + NumEnemy].Y - this.player.Y) < (this.enemy[i + NumEnemy].R + 5) * (this.enemy[i + NumEnemy].R + 5))
-                        {
-                            this.player.X = this.Bounds.Width / 2;
-                            this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
-                            S = 0;
+                        AvoidAvoidAvoid.play1.Visible = false;
+                        AvoidAvoidAvoid.stage.Visible = false;
+                        AvoidAvoidAvoid.opening.Visible = false;
+                        AvoidAvoidAvoid.result.Visible = true;
+                        AvoidAvoidAvoid.ending.Visible = false;
+                    }
+                    if (S > 100 && (this.enemy[i + NumEnemy].X - this.player.X + this.enemy[i + NumEnemy].R - 5) * (this.enemy[i + NumEnemy].X - this.player.X + this.enemy[i + NumEnemy].R - 5) + (this.enemy[i + NumEnemy].Y - this.player.Y + this.enemy[i + NumEnemy].R - 5) * (this.enemy[i + NumEnemy].Y - this.player.Y + this.enemy[i + NumEnemy].R - 5) < (this.enemy[i + NumEnemy].R + 5) * (this.enemy[i + NumEnemy].R + 5))
+                    {
+                        this.player.X = this.Bounds.Width / 2;
+                        this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
+                        S = 0;
 
-                            MainGameForm.play1.Visible = false;
-                            MainGameForm.stage.Visible = false;
-                            MainGameForm.opening.Visible = false;
-                            MainGameForm.result.Visible = true;
-                            MainGameForm.ending.Visible = false;
-                        }
+                        AvoidAvoidAvoid.play1.Visible = false;
+                        AvoidAvoidAvoid.stage.Visible = false;
+                        AvoidAvoidAvoid.opening.Visible = false;
+                        AvoidAvoidAvoid.result.Visible = true;
+                        AvoidAvoidAvoid.ending.Visible = false;
                     }
 
                     // 進める
@@ -241,49 +249,46 @@ namespace NewGame
             // ===========
             // ステージ３
             // ===========
-            else if (MainGameForm.Stage == 3)
+            else if (AvoidAvoidAvoid.play1.Visible && AvoidAvoidAvoid.Stage == 3)
             {
                 for (int i = 0; i < NumEnemy; ++i)
                 {
                     // 当たり判定
-                    if (MainGameForm.Stage == 3)
+                    if (S > 100 && (this.enemy[i].X - this.player.X + this.enemy[i].R - 5) * (this.enemy[i].X - this.player.X + this.enemy[i].R - 5) + (this.enemy[i].Y - this.player.Y + this.enemy[i].R - 5) * (this.enemy[i].Y - this.player.Y + this.enemy[i].R - 5) < (this.enemy[i].R + 5) * (this.enemy[i].R + 5))
                     {
-                        if (this.enemy[i].R < 30 && (this.enemy[i].X - this.player.X) * (this.enemy[i].X - this.player.X) + (this.enemy[i].Y - this.player.Y) * (this.enemy[i].Y - this.player.Y) < (this.enemy[i].R + 5) * (this.enemy[i].R + 5))
-                        {
-                            this.player.X = this.Bounds.Width / 2;
-                            this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
-                            S = 0;
+                        this.player.X = this.Bounds.Width / 2;
+                        this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
+                        S = 0;
 
-                            MainGameForm.play1.Visible = false;
-                            MainGameForm.stage.Visible = false;
-                            MainGameForm.opening.Visible = false;
-                            MainGameForm.result.Visible = true;
-                            MainGameForm.ending.Visible = false;
-                        }
-                        if (this.enemy[i + NumEnemy].R < 30 && (this.enemy[i + NumEnemy].X - this.player.X) * (this.enemy[i + NumEnemy].X - this.player.X) + (this.enemy[i + NumEnemy].Y - this.player.Y) * (this.enemy[i + NumEnemy].Y - this.player.Y) < (this.enemy[i + NumEnemy].R + 5) * (this.enemy[i + NumEnemy].R + 5))
-                        {
-                            this.player.X = this.Bounds.Width / 2;
-                            this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
-                            S = 0;
+                        AvoidAvoidAvoid.play1.Visible = false;
+                        AvoidAvoidAvoid.stage.Visible = false;
+                        AvoidAvoidAvoid.opening.Visible = false;
+                        AvoidAvoidAvoid.result.Visible = true;
+                        AvoidAvoidAvoid.ending.Visible = false;
+                    }
+                    if (S > 100 && (this.enemy[i + NumEnemy].X - this.player.X + this.enemy[i + NumEnemy].R - 5) * (this.enemy[i + NumEnemy].X - this.player.X + this.enemy[i + NumEnemy].R - 5) + (this.enemy[i + NumEnemy].Y - this.player.Y + this.enemy[i + NumEnemy].R - 5) * (this.enemy[i + NumEnemy].Y - this.player.Y + this.enemy[i + NumEnemy].R - 5) < (this.enemy[i + NumEnemy].R + 5) * (this.enemy[i + NumEnemy].R + 5))
+                    {
+                        this.player.X = this.Bounds.Width / 2;
+                        this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
+                        S = 0;
 
-                            MainGameForm.play1.Visible = false;
-                            MainGameForm.stage.Visible = false;
-                            MainGameForm.opening.Visible = false;
-                            MainGameForm.result.Visible = true;
-                            MainGameForm.ending.Visible = false;
-                        }
-                        if (this.enemy[i + 2 * NumEnemy].R < 30 && (this.enemy[i + 2 * NumEnemy].X - this.player.X) * (this.enemy[i + 2 * NumEnemy].X - this.player.X) + (this.enemy[i + 2 * NumEnemy].Y - this.player.Y) * (this.enemy[i + 2 * NumEnemy].Y - this.player.Y) < (this.enemy[i + 2 * NumEnemy].R + 5) * (this.enemy[i + 2 * NumEnemy].R + 5))
-                        {
-                            this.player.X = this.Bounds.Width / 2;
-                            this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
-                            S = 0;
+                        AvoidAvoidAvoid.play1.Visible = false;
+                        AvoidAvoidAvoid.stage.Visible = false;
+                        AvoidAvoidAvoid.opening.Visible = false;
+                        AvoidAvoidAvoid.result.Visible = true;
+                        AvoidAvoidAvoid.ending.Visible = false;
+                    }
+                    if (S > 100 && (this.enemy[i + 2 * NumEnemy].X - this.player.X + this.enemy[i + 2 * NumEnemy].R - 5) * (this.enemy[i + 2 * NumEnemy].X - this.player.X + this.enemy[i + 2 * NumEnemy].R - 5) + (this.enemy[i + 2 * NumEnemy].Y - this.player.Y + this.enemy[i + 2 * NumEnemy].R - 5) * (this.enemy[i + 2 * NumEnemy].Y - this.player.Y + this.enemy[i + 2 * NumEnemy].R - 5) < (this.enemy[i + 2 * NumEnemy].R + 5) * (this.enemy[i + 2 * NumEnemy].R + 5))
+                    {
+                        this.player.X = this.Bounds.Width / 2;
+                        this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
+                        S = 0;
 
-                            MainGameForm.play1.Visible = false;
-                            MainGameForm.stage.Visible = false;
-                            MainGameForm.opening.Visible = false;
-                            MainGameForm.result.Visible = true;
-                            MainGameForm.ending.Visible = false;
-                        }
+                        AvoidAvoidAvoid.play1.Visible = false;
+                        AvoidAvoidAvoid.stage.Visible = false;
+                        AvoidAvoidAvoid.opening.Visible = false;
+                        AvoidAvoidAvoid.result.Visible = true;
+                        AvoidAvoidAvoid.ending.Visible = false;
                     }
 
                     // 進める
@@ -327,61 +332,46 @@ namespace NewGame
             // ===========
             // ステージ４
             // ===========
-            else if (MainGameForm.Stage == 4)
+            else if (AvoidAvoidAvoid.play1.Visible && AvoidAvoidAvoid.Stage == 4)
             {
                 for (int i = 0; i < NumEnemy; ++i)
                 {
                     // 当たり判定
-                    if (MainGameForm.Stage == 4)
+                    if (S > 100 && (this.enemy[i].X - this.player.X + this.enemy[i].R - 5) * (this.enemy[i].X - this.player.X + this.enemy[i].R - 5) + (this.enemy[i].Y - this.player.Y + this.enemy[i].R - 5) * (this.enemy[i].Y - this.player.Y + this.enemy[i].R - 5) < (this.enemy[i].R + 5) * (this.enemy[i].R + 5))
                     {
-                        if (this.enemy[i].R < 30 && (this.enemy[i].X - this.player.X) * (this.enemy[i].X - this.player.X) + (this.enemy[i].Y - this.player.Y) * (this.enemy[i].Y - this.player.Y) < (this.enemy[i].R + 5) * (this.enemy[i].R + 5))
-                        {
-                            this.player.X = this.Bounds.Width / 2;
-                            this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
-                            S = 0;
+                        this.player.X = this.Bounds.Width / 2;
+                        this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
+                        S = 0;
 
-                            MainGameForm.play1.Visible = false;
-                            MainGameForm.stage.Visible = false;
-                            MainGameForm.opening.Visible = false;
-                            MainGameForm.result.Visible = true;
-                            MainGameForm.ending.Visible = false;
-                        }
-                        if (this.enemy[i + NumEnemy].R < 30 && (this.enemy[i + NumEnemy].X - this.player.X) * (this.enemy[i + NumEnemy].X - this.player.X) + (this.enemy[i + NumEnemy].Y - this.player.Y) * (this.enemy[i + NumEnemy].Y - this.player.Y) < (this.enemy[i + NumEnemy].R + 5) * (this.enemy[i + NumEnemy].R + 5))
-                        {
-                            this.player.X = this.Bounds.Width / 2;
-                            this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
-                            S = 0;
+                        AvoidAvoidAvoid.play1.Visible = false;
+                        AvoidAvoidAvoid.stage.Visible = false;
+                        AvoidAvoidAvoid.opening.Visible = false;
+                        AvoidAvoidAvoid.result.Visible = true;
+                        AvoidAvoidAvoid.ending.Visible = false;
+                    }
+                    if (S > 100 && (this.enemy[i + NumEnemy].X - this.player.X + this.enemy[i + NumEnemy].R - 5) * (this.enemy[i + NumEnemy].X - this.player.X + this.enemy[i + NumEnemy].R - 5) + (this.enemy[i + NumEnemy].Y - this.player.Y + this.enemy[i + NumEnemy].R - 5) * (this.enemy[i + NumEnemy].Y - this.player.Y + this.enemy[i + NumEnemy].R - 5) < (this.enemy[i + NumEnemy].R + 5) * (this.enemy[i + NumEnemy].R + 5))
+                    {
+                        this.player.X = this.Bounds.Width / 2;
+                        this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
+                        S = 0;
 
-                            MainGameForm.play1.Visible = false;
-                            MainGameForm.stage.Visible = false;
-                            MainGameForm.opening.Visible = false;
-                            MainGameForm.result.Visible = true;
-                            MainGameForm.ending.Visible = false;
-                        }
-                        if (this.enemy[i + 2 * NumEnemy].R < 30 && (this.enemy[i + 2 * NumEnemy].X - this.player.X) * (this.enemy[i + 2 * NumEnemy].X - this.player.X) + (this.enemy[i + 2 * NumEnemy].Y - this.player.Y) * (this.enemy[i + 2 * NumEnemy].Y - this.player.Y) < (this.enemy[i + 2 * NumEnemy].R + 5) * (this.enemy[i + 2 * NumEnemy].R + 5))
-                        {
-                            this.player.X = this.Bounds.Width / 2;
-                            this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
-                            S = 0;
+                        AvoidAvoidAvoid.play1.Visible = false;
+                        AvoidAvoidAvoid.stage.Visible = false;
+                        AvoidAvoidAvoid.opening.Visible = false;
+                        AvoidAvoidAvoid.result.Visible = true;
+                        AvoidAvoidAvoid.ending.Visible = false;
+                    }
+                    if (S > 100 && (this.enemy[i + 2 * NumEnemy].X - this.player.X + this.enemy[i + 2 * NumEnemy].R - 5) * (this.enemy[i + 2 * NumEnemy].X - this.player.X + this.enemy[i + 2 * NumEnemy].R - 5) + (this.enemy[i + 2 * NumEnemy].Y - this.player.Y + this.enemy[i + 2 * NumEnemy].R - 5) * (this.enemy[i + 2 * NumEnemy].Y - this.player.Y + this.enemy[i + 2 * NumEnemy].R - 5) < (this.enemy[i + 2 * NumEnemy].R + 5) * (this.enemy[i + 2 * NumEnemy].R + 5))
+                    {
+                        this.player.X = this.Bounds.Width / 2;
+                        this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
+                        S = 0;
 
-                            MainGameForm.play1.Visible = false;
-                            MainGameForm.stage.Visible = false;
-                            MainGameForm.opening.Visible = false;
-                            MainGameForm.result.Visible = true;
-                            MainGameForm.ending.Visible = false;
-                        }
-                        if ((this.enemy[i + 2 * NumEnemy].X - this.player.X) * (this.enemy[i + 2 * NumEnemy].X - this.player.X) + (this.enemy[i + 2 * NumEnemy].Y - this.player.Y) * (this.enemy[i + 2 * NumEnemy].Y - this.player.Y) < (this.enemy[i + 2 * NumEnemy].R + 5) * (this.enemy[i + 2 * NumEnemy].R + 5))
-                        {
-                            this.player.X = this.Bounds.Width / 2;
-                            this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
-                            S = 0;
-
-                            MainGameForm.play1.Visible = false;
-                            MainGameForm.stage.Visible = false;
-                            MainGameForm.opening.Visible = false;
-                            MainGameForm.result.Visible = true;
-                            MainGameForm.ending.Visible = false;
-                        }
+                        AvoidAvoidAvoid.play1.Visible = false;
+                        AvoidAvoidAvoid.stage.Visible = false;
+                        AvoidAvoidAvoid.opening.Visible = false;
+                        AvoidAvoidAvoid.result.Visible = true;
+                        AvoidAvoidAvoid.ending.Visible = false;
                     }
 
                     // 進める
@@ -425,17 +415,17 @@ namespace NewGame
                 for (int j = 0; j < NumDanmaku; ++j)
                 {
                     // 当たり判定
-                    if ((this.danmaku[j].X - this.player.X) * (this.danmaku[j].X - this.player.X) + (this.danmaku[j].Y - this.player.Y) * (this.danmaku[j].Y - this.player.Y) < (this.danmaku[j].R + 5) * (this.danmaku[j].R + 5))
+                    if (S > 100 && (this.danmaku[j].X - this.player.X + this.danmaku[j].R - 5) * (this.danmaku[j].X - this.player.X + this.danmaku[j].R - 5) + (this.danmaku[j].Y - this.player.Y + this.danmaku[j].R - 5) * (this.danmaku[j].Y - this.player.Y + this.danmaku[j].R - 5) < (this.danmaku[j].R + 5) * (this.danmaku[j].R + 5))
                     {
                         this.player.X = this.Bounds.Width / 2;
                         this.player.Y = (int)(this.Bounds.Height * 3.0 / 4);
                         S = 0;
 
-                        MainGameForm.play1.Visible = false;
-                        MainGameForm.stage.Visible = false;
-                        MainGameForm.opening.Visible = false;
-                        MainGameForm.result.Visible = true;
-                        MainGameForm.ending.Visible = false;
+                        AvoidAvoidAvoid.play1.Visible = false;
+                        AvoidAvoidAvoid.stage.Visible = false;
+                        AvoidAvoidAvoid.opening.Visible = false;
+                        AvoidAvoidAvoid.result.Visible = true;
+                        AvoidAvoidAvoid.ending.Visible = false;
                     }
 
 
@@ -465,13 +455,16 @@ namespace NewGame
             }
 
 
-            // =================
-            // 得点の加算と表示
-            // =================
-            PassedTime.Stop();
-            ++S; ++t;
-            this.label1.Text = "Score: " + S + ", " + MainGameForm.Stage;
-            PassedTime.Start();
+            if (AvoidAvoidAvoid.play1.Visible)
+            {
+                // =================
+                // 得点の加算と表示
+                // =================
+                PassedTime.Stop();
+                ++S; ++t;
+                this.label1.Text = "Score: " + S + ", " + AvoidAvoidAvoid.Stage;
+                PassedTime.Start();
+            }
 
             // 再描画
             Invalidate();
@@ -490,16 +483,16 @@ namespace NewGame
             for (int i = 0; i < NumEnemy; ++i)
                 e.Graphics.FillEllipse(brush, this.enemy[i].X, this.enemy[i].Y, this.enemy[i].R * 2, this.enemy[i].R * 2);
 
-            if(MainGameForm.Stage >= 2)
+            if(AvoidAvoidAvoid.Stage >= 2)
                 for (int i = NumEnemy; i < 2 * NumEnemy; ++i)
                     e.Graphics.FillEllipse(brush, this.enemy[i].X, this.enemy[i].Y, this.enemy[i].R * 2, this.enemy[i].R * 2);
 
-            if (MainGameForm.Stage >= 3)
+            if (AvoidAvoidAvoid.Stage >= 3)
                 for (int i = 2 * NumEnemy; i < 3 * NumEnemy; ++i)
                     e.Graphics.FillEllipse(brush, this.enemy[i].X, this.enemy[i].Y, this.enemy[i].R * 2, this.enemy[i].R * 2);
 
             
-            if (MainGameForm.Stage >= 4)
+            if (AvoidAvoidAvoid.Stage >= 4)
                 for(int i = 0; i < NumDanmaku; ++i)
                     e.Graphics.FillEllipse(brush, this.danmaku[i].X, this.danmaku[i].Y, this.danmaku[i].R * 2, this.danmaku[i].R * 2);
 
