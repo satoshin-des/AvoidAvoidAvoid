@@ -11,3 +11,7 @@ C:\Users\trans\source\repos\NewGame\NewGame\obj\Release\NewGame.csproj.GenerateR
 C:\Users\trans\source\repos\NewGame\NewGame\obj\Release\NewGame.csproj.CoreCompileInputs.cache
 C:\Users\trans\source\repos\NewGame\NewGame\obj\Release\NewGame.exe
 C:\Users\trans\source\repos\NewGame\NewGame\obj\Release\NewGame.AvoidAvoidAvoid.resources
+C:\Users\trans\source\repos\NewGame\NewGame\bin\Release\NewGame.exe.manifest
+C:\Users\trans\source\repos\NewGame\NewGame\bin\Release\NewGame.application
+C:\Users\trans\source\repos\NewGame\NewGame\obj\Release\NewGame.exe.manifest
+C:\Users\trans\source\repos\NewGame\NewGame\obj\Release\NewGame.application

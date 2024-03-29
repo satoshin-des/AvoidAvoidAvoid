@@ -53,25 +53,6 @@ namespace NewGame
             for(int i = 0; i < NumDanmaku; ++i)
             {
                 this.danmaku.Add(new Enemy(this.Bounds.Width / (float)2.0, this.Bounds.Height * (float)1.0 / 6, (float)Math.Cos(i * Math.PI / 4.0 + i), (float)Math.Sin(i * Math.PI / 4.0 + i), 20));
-
-                /*
-                if(i % 8 == 0)
-                    this.danmaku.Add(new Enemy(this.Bounds.Width / (float)2.0, this.Bounds.Height * (float)1.0 / 6, 1, 0, 20));
-                else if (i % 8 == 1)
-                    this.danmaku.Add(new Enemy(this.Bounds.Width / (float)2.0, this.Bounds.Height * (float)1.0 / 6, 1 / (float)Math.Sqrt(2), 1 / (float)Math.Sqrt(2), 20));
-                else if (i % 8 == 2)
-                    this.danmaku.Add(new Enemy(this.Bounds.Width / (float)2.0, this.Bounds.Height * (float)1.0 / 6, 0, 1, 20));
-                else if (i % 8 == 3)
-                    this.danmaku.Add(new Enemy(this.Bounds.Width / (float)2.0, this.Bounds.Height * (float)1.0 / 6, -1 / (float)Math.Sqrt(2), 1 / (float)Math.Sqrt(2), 20));
-                else if (i % 8 == 4)
-                    this.danmaku.Add(new Enemy(this.Bounds.Width / (float)2.0, this.Bounds.Height * (float)1.0 / 6, -1, 0, 20));
-                else if (i % 8 == 5)
-                    this.danmaku.Add(new Enemy(this.Bounds.Width / (float)2.0, this.Bounds.Height * (float)1.0 / 6, -1 / (float)Math.Sqrt(2), -1 / (float)Math.Sqrt(2), 20));
-                else if (i % 8 == 6)
-                    this.danmaku.Add(new Enemy(this.Bounds.Width / (float)2.0, this.Bounds.Height * (float)1.0 / 6, 0, -1, 20));
-                else if (i % 8 == 7)
-                    this.danmaku.Add(new Enemy(this.Bounds.Width / (float)2.0, this.Bounds.Height * (float)1.0 / 6, 1 / (float)Math.Sqrt(2), -1 / (float)Math.Sqrt(2), 20));
-                */
             }
 
             // Timer timer = new Timer();
